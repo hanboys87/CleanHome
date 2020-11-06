@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">L C P</string>
+    <string name="take_picture">사진 촬영 하기</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="take_picture2">사진 촬영 하기</string>
+</resources>
