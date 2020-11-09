@@ -1,192 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
-    android:layout_width="fill_parent"
-
-    android:layout_height="fill_parent"
-
-    android:orientation="vertical" >
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-
-
-    <LinearLayout
-
-        android:layout_width="fill_parent"
-
+    <TimePicker
+        android:id="@+id/timePicker"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        android:orientation="horizontal" >
-
-
-
-
-        <EditText
-
-            android:id="@+id/edit1"
-
-            android:layout_width="wrap_content"
-
-            android:layout_height="wrap_content"
-
-            android:layout_weight="1" />
-
-
-
-
-        <TextView
-
-            android:layout_width="wrap_content"
-
-            android:layout_height="wrap_content"
-
-            android:layout_weight="1"
-
-            android:text="년" />
-
-
-
-
-        <EditText
-
-            android:id="@+id/edit2"
-
-            android:layout_width="wrap_content"
-
-            android:layout_height="wrap_content"
-
-            android:layout_weight="1" />
-
-
-
-
-        <TextView
-
-            android:layout_width="wrap_content"
-
-            android:layout_height="wrap_content"
-
-            android:layout_weight="1"
-
-            android:text="월" />
-
-
-
-
-        <EditText
-
-            android:id="@+id/edit3"
-
-            android:layout_width="wrap_content"
-
-            android:layout_height="wrap_content"
-
-            android:layout_weight="1" />
-
-
-
-
-        <TextView
-
-            android:layout_width="wrap_content"
-
-            android:layout_height="wrap_content"
-
-            android:layout_weight="1"
-
-            android:text="일" />
-
-    </LinearLayout>
-
-
-
-
-    <LinearLayout
-
-        android:layout_width="fill_parent"
-
-        android:layout_height="wrap_content"
-
-        android:orientation="horizontal" >
-
-
-
-
-        <EditText
-
-            android:id="@+id/edit4"
-
-            android:layout_width="wrap_content"
-
-            android:layout_height="wrap_content"
-
-            android:layout_weight="1" />
-
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="am"
-            android:id="@+id/amBtn" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="pm"
-            android:id="@+id/pmBtn"/>
-        <TextView
-
-            android:layout_width="wrap_content"
-
-            android:layout_height="wrap_content"
-
-            android:layout_weight="1"
-
-            android:text="시" />
-
-
-
-
-        <EditText
-
-            android:id="@+id/edit5"
-
-            android:layout_width="wrap_content"
-
-            android:layout_height="wrap_content"
-
-            android:layout_weight="1" />
-
-
-
-
-        <TextView
-
-            android:layout_width="wrap_content"
-
-            android:layout_height="wrap_content"
-
-            android:layout_weight="1"
-
-            android:text="분" />
-
-    </LinearLayout>
-
-
-
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:timePickerMode="spinner"/>
 
     <Button
-
-        android:id="@+id/button1"
-
-        android:layout_width="fill_parent"
-
+        android:text="알람 설정하기"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/timePicker"
+        android:layout_marginTop="60dp"
+        android:paddingRight="20dp"
+        android:paddingLeft="20dp"
+        android:id="@+id/bt_alarm_register"
+        android:textColor="@color/colorWhite"/>
 
-        android:text="알람설정" />
 
 
-
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

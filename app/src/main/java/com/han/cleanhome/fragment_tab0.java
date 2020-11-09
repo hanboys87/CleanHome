@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -14,10 +15,21 @@ import androidx.fragment.app.Fragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import android.os.Environment;
+import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -52,6 +64,8 @@ public class fragment_tab0 extends Fragment {
         View view = inflater.inflate(R.layout.fragment_tab0, container, false);
         ButterKnife.bind(this, view);
         CameraPermission();
+        loadImageFromStorage(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getAbsolutePath() + "/Camera/",false);
+        loadImageFromStorage(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getAbsolutePath() + "/Camera/",true);
         return view;
     }
 
@@ -72,10 +86,8 @@ public class fragment_tab0 extends Fragment {
     void CameraPermission() {
         // 6.0 마쉬멜로우 이상일 경우에는 권한 체크 후 권한 요청
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.CAMERA)
-                    == PackageManager.PERMISSION_GRANTED &&
-                    ActivityCompat.checkSelfPermission(mContext, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                            == PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.CAMERA)  == PackageManager.PERMISSION_GRANTED &&
+                    ActivityCompat.checkSelfPermission(mContext, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
             } else {
                 ActivityCompat.requestPermissions((Activity) mContext, new String[]{Manifest.permission.CAMERA,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
@@ -104,6 +116,9 @@ public class fragment_tab0 extends Fragment {
                     Bitmap bitmap = (Bitmap) intent.getExtras().get("data");
                     if (bitmap != null) {
                         iv_0.setImageBitmap(bitmap);
+                        String path = createPictureFilePath("img1.jpg");
+                        saveBitmapAsFile(bitmap,path);
+                        scanMediaFile(new File(path));
                     }
                 }
                 break;
@@ -112,9 +127,85 @@ public class fragment_tab0 extends Fragment {
                     Bitmap bitmap = (Bitmap) intent.getExtras().get("data");
                     if (bitmap != null) {
                         iv_1.setImageBitmap(bitmap);
+                        String path = createPictureFilePath("img2.jpg");
+                        saveBitmapAsFile(bitmap,path);
+                        scanMediaFile(new File(path));
                     }
                 }
                 break;
         }
     }
+
+    // 이미지 파일을 생성하는 함수
+    public static final String SAVE_MEDIA_PATH = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getAbsolutePath() + "/Camera/";
+    public String createPictureFilePath(String fileName) {
+        createMediaFileDirectory();
+        //String fileName = "img1"+ ".jpg";
+        String fullPath = SAVE_MEDIA_PATH + fileName;
+        return fullPath;
+    }
+
+    // 특정 미디어 파일의 디렉토리를 생성하는 함수
+    private void createMediaFileDirectory() {
+        File downloadDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
+        if (!downloadDir.exists()) {
+            downloadDir.mkdir();
+        }
+
+        File cameraDir = new File(SAVE_MEDIA_PATH);
+        if (!cameraDir.exists()) {
+            cameraDir.mkdir();
+        }
+    }
+
+    // 저장된 사진 불러오는 함수
+    private void loadImageFromStorage(String path, boolean flag)
+    {
+        try {
+            File f;
+            if(flag) {
+                f = new File(path, "img1.jpg");
+                Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+                iv_0.setImageBitmap(b);
+            }else{
+                f = new File(path, "img2.jpg");
+                Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+                iv_1.setImageBitmap(b);
+            }
+        }
+        catch (FileNotFoundException e)
+        {
+            Log.e("HAN","exception: "+e);
+            e.printStackTrace();
+        }
+    }
+
+    // 카메라로 찍은 함수를 특정 위치로 저장하는 함수
+    private void saveBitmapAsFile(Bitmap bitmap, String filepath) {
+        File file = new File(filepath);
+        OutputStream os = null;
+
+        try {
+            file.createNewFile();
+            os = new FileOutputStream(file);
+
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, os);
+            os.close();
+            Toast.makeText(mContext,"사진 저장",Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Log.e("HAN","Exception: "+e);
+            e.printStackTrace();
+        }
+    }
+
+    // 미디어 스캔으로 업데이트
+    private void scanMediaFile(final File file) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                new MediaScanning(mContext, file);
+            }
+        }, 900);
+    }
+
 }

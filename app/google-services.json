@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "789756628584",
-    "firebase_url": "https://clean-289115.firebaseio.com",
-    "project_id": "clean-289115",
-    "storage_bucket": "clean-289115.appspot.com"
+    "project_number": "922920961900",
+    "firebase_url": "https://test-57286.firebaseio.com",
+    "project_id": "test-57286",
+    "storage_bucket": "test-57286.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:789756628584:android:a04de9dfa312f0a111f5dd",
+        "mobilesdk_app_id": "1:922920961900:android:2ea09b1043d7c780325549",
         "android_client_info": {
           "package_name": "com.han.cleanhome"
         }
       },
       "oauth_client": [
         {
-          "client_id": "789756628584-01gn5hepv35lsh9fje4iisvtsegq2iiv.apps.googleusercontent.com",
+          "client_id": "922920961900-u09j1s4ed7rg876mlott1h59esd1dcis.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDuAZ_hrI4sOeApx3SybVW9og6DqHsDeDM"
+          "current_key": "AIzaSyBqJCUezBNe8JJEOqcet-rVRZuhEKAD3gY"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "789756628584-01gn5hepv35lsh9fje4iisvtsegq2iiv.apps.googleusercontent.com",
+              "client_id": "922920961900-u09j1s4ed7rg876mlott1h59esd1dcis.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

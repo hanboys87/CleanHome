@@ -51,11 +51,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initViews() {
-        mListView = (ListView) findViewById(R.id.list_message);
+        //mListView = (ListView) findViewById(R.id.list_message);
         mAdapter = new ChatAdapter(this, 0);
         mListView.setAdapter(mAdapter);
 
-        mEdtMessage = (EditText) findViewById(R.id.edit_message);
+        //mEdtMessage = (EditText) findViewById(R.id.edit_message);
         findViewById(R.id.btn_send).setOnClickListener(this);
     }
 
